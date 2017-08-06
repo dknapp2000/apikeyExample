@@ -1,5 +1,7 @@
 'use strict';
-
+// 
+// This needs to be "objectified" so that config is persistent.
+//
 const apiKeys = {};
 const keybug = require( "debug" )("keybug");
 
