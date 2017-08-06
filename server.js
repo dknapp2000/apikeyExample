@@ -8,7 +8,7 @@ const express = require( "express" );
 const app = express();
 const keybug = require( "debug" )("keybug");
 
-app.get( "/:key", apiKeyCheck, function( req, res ) {
+app.get( "/:apikey", apiKeyCheck, function( req, res ) {
     console.log( "Request to /" );
     res.json( { status: "OK", entry: req.body.user } );
 })
@@ -23,7 +23,7 @@ app.listen( port, function() {
 
 function apiKeyCheck( req, res, next ) {
     keybug( req.headers );
-    let apiKey = req.params.key;                  // Check params first
+    let apiKey = req.params.apikey;                  // Check params first
     if ( ! apiKey ) apiKey = req.headers.apikey;  // Then look in headers
     keybug( apiKey );
     if ( ! apiKey ) return res.redirect( "/unauthorized" );
