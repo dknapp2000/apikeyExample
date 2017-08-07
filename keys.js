@@ -30,7 +30,7 @@ const apiKeys = [
     { key: "u0aetKloIt", user: "" },
     { key: "qm6BUReGvn", user: "" },
     { key: "PGGIIY9mCZ", user: "" },
-    { key: "testing", user: "testing" }
+    { key: "testing", user: "testing", rateLimit: { perMinute: 120, timeBetween: 100 } }
 ];
 
 module.exports = apiKeys;
