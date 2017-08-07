@@ -2,18 +2,24 @@
 //
 // apiKeys.js - validate an API key provided in an http query or header against a json list of keys.
 //
-// example usage: 
+// example usage:
 // const apiKeyCheck = require( "./apiKeys.js" ).config( { unauthRedirect: "/unauthorized", keyFile: "./keys.js" } );
 //
 // app.get( "/v1/api", apiKeyCheck, function( req, res ) { ... } );
 //
+// Note: for debugging use DEBUG=keybug
+//
 const apiKeys = {};
 const keybug = require( "debug" )("keybug");
-
+//
+// unauthRedirect and keyfile are set by apiKeys.config.
+//
 apiKeys.unauthRedirect = undefined;
 
 apiKeys.keyFile = undefined;
-
+//
+// Keys is a list of keys loaded from keyFile in the config call.
+//
 apiKeys.keys = undefined;
 
 apiKeys.apiKeyCheck = function ( req, res, next ) {
@@ -35,7 +41,10 @@ apiKeys.apiKeyCheck = function ( req, res, next ) {
 apiKeys.loadKeys = function( keyFile ) {
     apiKeys.keys = require( apiKeys.keyFile );
 }
-
+//
+// Sets config parameters and loads the keyfile from apiKeys.keyFile.
+// returns apiKeys.apiKeyCheck for use as middleware
+//
 apiKeys.config = function( config ) {
     apiKeys.unauthRedirect = config.unauthRedirect;
     apiKeys.keyFile = config.keyFile;
