@@ -1,6 +1,11 @@
 'use strict';
 //
-// This needs to be "objectified" so that config is persistent.
+// apiKeys.js - validate an API key provided in an http query or header against a json list of keys.
+//
+// example usage: 
+// const apiKeyCheck = require( "./apiKeys.js" ).config( { unauthRedirect: "/unauthorized", keyFile: "./keys.js" } );
+//
+// app.get( "/v1/api", apiKeyCheck, function( req, res ) { ... } );
 //
 const apiKeys = {};
 const keybug = require( "debug" )("keybug");
